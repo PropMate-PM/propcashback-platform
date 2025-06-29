@@ -14,7 +14,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Premium Background with Gradient */}
+      {/* Extended Premium Background with Gradient - covers header area */}
       <div 
         className="absolute inset-0 z-0"
         style={{
@@ -24,17 +24,22 @@ export default function Hero() {
             ${theme.background} 50%, 
             rgba(215, 196, 242, 0.05) 75%, 
             ${theme.background} 100%
-          )`
+          )`,
+          // Extend background upward to cover header
+          top: '-120px',
+          height: 'calc(100vh + 120px)'
         }}
       />
 
-      {/* Subtle Pattern Overlay */}
+      {/* Subtle Pattern Overlay - also extended */}
       <div 
         className="absolute inset-0 z-0 opacity-5"
         style={{
           backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
                            radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
-          backgroundSize: '60px 60px, 40px 40px'
+          backgroundSize: '60px 60px, 40px 40px',
+          top: '-120px',
+          height: 'calc(100vh + 120px)'
         }}
       />
 

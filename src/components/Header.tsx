@@ -11,64 +11,10 @@ interface HeaderProps {
 
 export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isGlassActive, setIsGlassActive] = useState(false)
   const { isDark, toggleTheme, theme } = useTheme()
-  const observerRef = useRef<IntersectionObserver | null>(null)
 
   // Check if current user is admin
   const isAdmin = user?.email === 'admin@propcashback.com'
-
-  useEffect(() => {
-    // Create the trigger element that will be observed
-    const triggerElement = document.createElement('div')
-    triggerElement.id = 'header-trigger'
-    triggerElement.style.position = 'absolute'
-    triggerElement.style.top = '0'
-    triggerElement.style.left = '0'
-    triggerElement.style.width = '100%'
-    triggerElement.style.height = '1px'
-    triggerElement.style.pointerEvents = 'none'
-    triggerElement.style.visibility = 'hidden'
-
-    // Find the main content area (Hero section) and insert the trigger at its top
-    const heroSection = document.querySelector('section')
-    if (heroSection) {
-      heroSection.style.position = 'relative'
-      heroSection.insertBefore(triggerElement, heroSection.firstChild)
-    }
-
-    // Set up Intersection Observer
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // When the trigger element is NOT intersecting (i.e., it's scrolled past the top),
-          // the header should have the glass effect
-          setIsGlassActive(!entry.isIntersecting)
-        })
-      },
-      {
-        // Use a small negative top margin to trigger slightly before the element completely disappears
-        rootMargin: '-1px 0px 0px 0px',
-        threshold: 0
-      }
-    )
-
-    // Start observing the trigger element
-    if (observerRef.current && triggerElement) {
-      observerRef.current.observe(triggerElement)
-    }
-
-    // Cleanup function
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect()
-      }
-      // Remove the trigger element
-      if (triggerElement && triggerElement.parentNode) {
-        triggerElement.parentNode.removeChild(triggerElement)
-      }
-    }
-  }, [])
 
   // Close mobile menu when clicking outside or on navigation links
   useEffect(() => {
@@ -91,38 +37,20 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
       // Responsive shape: pill on desktop, rectangular on mobile
       maxWidth: '950px',
       margin: '0 auto',
+      // Always transparent and glassy
+      transition: 'all 0.3s ease-out',
+      backgroundColor: isDark 
+        ? 'rgba(40, 40, 40, 0.4)'
+        : 'rgba(255, 255, 255, 0.4)',
+      backdropFilter: 'blur(16px)',
+      WebkitBackdropFilter: 'blur(16px)',
+      border: '1px solid rgba(255, 255, 255, 0.08)',
+      boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06)',
+      // Responsive border radius: pill on desktop, rounded rectangle on mobile
+      borderRadius: 'clamp(16px, 4vw, 9999px)',
     }
 
-    if (isGlassActive) {
-      return {
-        ...baseStyles,
-        // 1-second ease-in transition when glass effect appears (scrolling down)
-        transition: 'background-color 1s ease-in, backdrop-filter 1s ease-in, border-color 1s ease-in, box-shadow 1s ease-in, border-radius 1s ease-in',
-        // Glass effect
-        backgroundColor: isDark 
-          ? 'rgba(40, 40, 40, 0.4)'
-          : 'rgba(255, 255, 255, 0.4)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
-        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.06)',
-        // Responsive border radius: pill on desktop, rounded rectangle on mobile
-        borderRadius: 'clamp(16px, 4vw, 9999px)',
-      }
-    } else {
-      return {
-        ...baseStyles,
-        // 0.3-second ease-out transition when glass effect disappears (scrolling up)
-        transition: 'background-color 0.3s ease-out, backdrop-filter 0.3s ease-out, border-color 0.3s ease-out, box-shadow 0.3s ease-out, border-radius 0.3s ease-out',
-        backgroundColor: 'transparent',
-        backdropFilter: 'blur(0px)',
-        WebkitBackdropFilter: 'blur(0px)',
-        border: '1px solid transparent',
-        boxShadow: 'none',
-        // Responsive border radius: pill on desktop, rounded rectangle on mobile
-        borderRadius: 'clamp(16px, 4vw, 9999px)',
-      }
-    }
+    return baseStyles
   }
 
   const getOuterContainerStyles = (): React.CSSProperties => {
@@ -146,7 +74,7 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
 
   return (
     <header 
-      className={`sticky top-0 z-50 ${isGlassActive ? 'header-glass-active' : ''}`}
+      className="sticky top-0 z-50"
       style={getOuterContainerStyles()}
     >
       <div 

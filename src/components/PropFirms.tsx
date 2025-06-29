@@ -42,8 +42,8 @@ export default function PropFirms({ propFirms, onClaimCashback }: PropFirmsProps
         boxShadow: theme.cardShadow
       }}
     >
-      {/* First-time offer badge */}
-      {firm.is_first_time_offer && (
+      {/* First-time offer badge - only show when toggle is active AND firm has first-time offer */}
+      {showFirstTimeOnly && firm.is_first_time_offer && (
         <div 
           className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 px-2 sm:px-3 py-1 rounded-full typography-small font-semibold border flex items-center space-x-1"
           style={{

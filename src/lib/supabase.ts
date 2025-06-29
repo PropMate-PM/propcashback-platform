@@ -3,6 +3,13 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
+// Check if Supabase credentials are configured
+if (!supabaseUrl || !supabaseAnonKey || 
+    supabaseUrl === 'https://your-project-id.supabase.co' || 
+    supabaseAnonKey === 'your-anon-key-here') {
+  console.error('Supabase credentials not configured. Please update your .env file with actual Supabase project credentials.')
+}
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export interface PropFirm {
@@ -91,4 +98,11 @@ export const checkDuplicateSubmission = async (
   }
 
   return data && data.length > 0
+}
+
+// Helper function to check if Supabase is properly configured
+export const isSupabaseConfigured = (): boolean => {
+  return !(!supabaseUrl || !supabaseAnonKey || 
+    supabaseUrl === 'https://your-project-id.supabase.co' || 
+    supabaseAnonKey === 'your-anon-key-here')
 }

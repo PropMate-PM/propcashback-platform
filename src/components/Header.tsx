@@ -74,11 +74,44 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
 
   return (
     <header 
-      className="sticky top-0 z-50"
+      className="sticky top-0 z-50 relative"
       style={getOuterContainerStyles()}
     >
+      {/* Copy of Hero Background - Exact Same Gradient */}
       <div 
-        className="mx-4 sm:mx-6 lg:mx-8"
+        className="absolute inset-0 z-0"
+        style={{
+          background: `linear-gradient(135deg, 
+            ${theme.background} 0%, 
+            rgba(139, 90, 159, 0.1) 25%, 
+            ${theme.background} 50%, 
+            rgba(215, 196, 242, 0.05) 75%, 
+            ${theme.background} 100%
+          )`,
+          // Extend background to cover full header area
+          top: '-20px',
+          bottom: '-20px',
+          left: 0,
+          right: 0
+        }}
+      />
+
+      {/* Copy of Hero Pattern Overlay - Exact Same Pattern */}
+      <div 
+        className="absolute inset-0 z-0 opacity-5"
+        style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
+                           radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
+          backgroundSize: '60px 60px, 40px 40px',
+          top: '-20px',
+          bottom: '-20px',
+          left: 0,
+          right: 0
+        }}
+      />
+
+      <div 
+        className="mx-4 sm:mx-6 lg:mx-8 relative z-10"
         style={getPillStyles()}
       >
         <div className="flex justify-between items-center py-3 px-4 sm:px-6">

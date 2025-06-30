@@ -32,8 +32,10 @@ export const signIn = async (email: string, password: string) => {
 export const signOut = async () => {
   const { error } = await supabase.auth.signOut()
   if (error) {
-    // If the session doesn't exist, the user is effectively signed out already
-    if (error.code === 'session_not_found') {
+    // Handle various session-related errors gracefully
+    if (error.code === 'session_not_found' || 
+        error.message?.includes('Auth session missing') ||
+        error.message?.includes('Session from session_id claim in JWT does not exist')) {
       return // Don't throw error for already expired/invalid sessions
     }
     throw error

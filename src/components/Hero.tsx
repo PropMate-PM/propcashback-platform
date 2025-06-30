@@ -16,12 +16,18 @@ export default function Hero() {
     <section 
       className="relative overflow-hidden"
       style={{
-        // **HERO SECTION CSS REQUIREMENTS**
-        minHeight: '100vh',
+        // **HERO SECTION CSS REQUIREMENTS - FIXED**
+        // Account for header by using 100vh and positioning absolutely
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        // Position to start from top of viewport, behind header
+        position: 'relative',
+        top: 0,
+        left: 0,
+        right: 0
       }}
     >
       {/* Extended Premium Background with Gradient - covers header area */}

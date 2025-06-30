@@ -12,20 +12,42 @@ interface HeaderProps {
 export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
+  const [documentHeight, setDocumentHeight] = useState(0)
+  const [windowHeight, setWindowHeight] = useState(0)
   const { isDark, toggleTheme, theme } = useTheme()
 
   // Check if current user is admin
   const isAdmin = user?.email === 'admin@propcashback.com'
 
-  // Track scroll position for fade effect
+  // Track scroll position and document dimensions for fade effect
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
+    const updateDimensions = () => {
+      setDocumentHeight(document.documentElement.scrollHeight)
+      setWindowHeight(window.innerHeight)
+    }
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+      updateDimensions() // Update dimensions on scroll in case content changes
+    }
+
+    // Initial setup
+    updateDimensions()
+    handleScroll()
+
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', updateDimensions)
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', updateDimensions)
+    }
   }, [])
 
-  // Calculate fade opacity based on scroll position
-  const fadeOpacity = Math.max(0, 1 - (scrollY / 300)) // Fade out over 300px of scroll
+  // Calculate fade opacity based on scroll position relative to page end
+  const maxScroll = documentHeight - windowHeight
+  const scrollProgress = maxScroll > 0 ? scrollY / maxScroll : 0
+  const fadeOpacity = Math.max(0, 1 - scrollProgress) // Fade out as user scrolls to end
 
   // Close mobile menu when clicking outside or on navigation links
   useEffect(() => {
@@ -75,7 +97,7 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
 
   return (
     <>
-      {/* Fixed Background Layer - Seamless with Hero */}
+      {/* Fixed Background Layer - Covers Entire Page */}
       <div 
         className="fixed inset-0 z-0 pointer-events-none"
         style={{
@@ -87,19 +109,23 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
             ${theme.background} 100%
           )`,
           opacity: fadeOpacity,
-          transition: 'opacity 0.3s ease-out'
+          transition: 'opacity 0.1s ease-out',
+          transform: 'translateZ(0)', // Hardware acceleration
+          willChange: 'opacity'
         }}
       />
 
-      {/* Fixed Pattern Overlay - Seamless with Hero */}
+      {/* Fixed Pattern Overlay - Covers Entire Page */}
       <div 
-        className="fixed inset-0 z-0 pointer-events-none opacity-5"
+        className="fixed inset-0 z-0 pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
                            radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
           backgroundSize: '60px 60px, 40px 40px',
           opacity: fadeOpacity * 0.05,
-          transition: 'opacity 0.3s ease-out'
+          transition: 'opacity 0.1s ease-out',
+          transform: 'translateZ(0)', // Hardware acceleration
+          willChange: 'opacity'
         }}
       />
 
@@ -363,6 +389,16 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
             </div>
           )}
         </div>
+
+        {/* Debug Info (remove in production) */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="fixed bottom-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded text-xs z-50">
+            <div>Scroll: {Math.round(scrollY)}px</div>
+            <div>Max: {Math.round(documentHeight - windowHeight)}px</div>
+            <div>Progress: {Math.round(scrollProgress * 100)}%</div>
+            <div>Opacity: {Math.round(fadeOpacity * 100)}%</div>
+          </div>
+        )}
       </header>
     </>
   )

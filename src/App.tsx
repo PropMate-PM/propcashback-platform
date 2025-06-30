@@ -72,8 +72,13 @@ function AppContent() {
 
   return (
     <div 
-      className="min-h-screen"
-      style={{ backgroundColor: theme.background }}
+      className="min-h-screen relative"
+      style={{ 
+        backgroundColor: theme.background,
+        // Ensure content is above the fixed background layers
+        position: 'relative',
+        zIndex: 1
+      }}
     >
       <Header 
         onAdminClick={() => setIsAdminPanelOpen(true)}

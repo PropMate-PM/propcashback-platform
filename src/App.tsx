@@ -71,17 +71,47 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen">
-      <Header 
-        onAdminClick={() => setIsAdminPanelOpen(true)}
-        user={user}
-        onAuthClick={() => setIsAuthModalOpen(true)}
-        onSignOut={handleSignOut}
+    <div className="relative">
+      {/* Hero Background Extended to Full Viewport */}
+      <div 
+        className="fixed inset-0 z-0"
+        style={{
+          background: `linear-gradient(135deg,
+            ${theme.background} 0%,
+            rgba(139, 90, 159, 0.1) 25%,
+            ${theme.background} 50%,
+            rgba(215, 196, 242, 0.05) 75%,
+            ${theme.background} 100%
+          )`
+        }}
       />
-      <Hero />
-      <div style={{ backgroundColor: theme.background }}>
-        <PropFirms propFirms={propFirms} onClaimCashback={handleClaimCashback} />
-        <FAQ />
+
+      {/* Subtle Pattern Overlay */}
+      <div
+        className="fixed inset-0 z-0 opacity-5"
+        style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px),
+                          radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
+          backgroundSize: '60px 60px, 40px 40px'
+        }}
+      />
+
+      {/* Content Layer */}
+      <div className="relative z-10">
+        <Header 
+          onAdminClick={() => setIsAdminPanelOpen(true)}
+          user={user}
+          onAuthClick={() => setIsAuthModalOpen(true)}
+          onSignOut={handleSignOut}
+        />
+        <Hero />
+        <div 
+          className="relative z-20"
+          style={{ backgroundColor: theme.background }}
+        >
+          <PropFirms propFirms={propFirms} onClaimCashback={handleClaimCashback} />
+          <FAQ />
+        </div>
       </div>
       
       <CashbackModal

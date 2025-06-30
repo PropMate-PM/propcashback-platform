@@ -71,45 +71,19 @@ function AppContent() {
   }
 
   return (
-    <div className="relative">
-      {/* Global background moved from Hero.tsx */}
-      <div 
-        className="fixed inset-0 z-0"
-        style={{
-          background: `linear-gradient(135deg, 
-            ${theme.background} 0%, 
-            rgba(139, 90, 159, 0.1) 25%, 
-            ${theme.background} 50%, 
-            rgba(215, 196, 242, 0.05) 75%, 
-            ${theme.background} 100%
-          )`,
-        }}
+    <div 
+      className="min-h-screen"
+      style={{ backgroundColor: theme.background }}
+    >
+      <Header 
+        onAdminClick={() => setIsAdminPanelOpen(true)}
+        user={user}
+        onAuthClick={() => setIsAuthModalOpen(true)}
+        onSignOut={handleSignOut}
       />
-      {/* Global pattern overlay moved from Hero.tsx */}
-      <div 
-        className="fixed inset-0 z-0 opacity-5"
-        style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
-                          radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
-          backgroundSize: '60px 60px, 40px 40px',
-        }}
-      />
-
-      {/* All content sits on top of the global background */}
-      <div className="relative z-10">
-        <Header 
-          onAdminClick={() => setIsAdminPanelOpen(true)}
-          user={user}
-          onAuthClick={() => setIsAuthModalOpen(true)}
-          onSignOut={handleSignOut}
-        />
-        <Hero />
-        {/* The main tag is now transparent, letting the global background show through */}
-        <main style={{ backgroundColor: theme.background }}>
-          <PropFirms propFirms={propFirms} onClaimCashback={handleClaimCashback} />
-          <FAQ />
-        </main>
-      </div>
+      <Hero />
+      <PropFirms propFirms={propFirms} onClaimCashback={handleClaimCashback} />
+      <FAQ />
       
       <CashbackModal
         isOpen={isCashbackModalOpen}

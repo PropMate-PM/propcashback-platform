@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowDown, DollarSign, TrendingUp, Users, Vault } from 'lucide-react'
+import { ArrowDown, DollarSign, TrendingUp, Users } from 'lucide-react'
 import { useTheme } from '../contexts/ThemeContext'
 
 export default function Hero() {
@@ -75,50 +75,122 @@ export default function Hero() {
             </h1>
           </div>
 
-          {/* Golden Vault Visual */}
+          {/* Floating Dollar Bill Visual */}
           <div className="relative mb-8 sm:mb-12 flex justify-center">
-            <div 
-              className="relative p-8 sm:p-12 rounded-3xl border-2 transform hover:scale-105 transition-all duration-500"
-              style={{
-                background: `linear-gradient(135deg, 
-                  rgba(215, 196, 242, 0.1) 0%, 
-                  rgba(139, 90, 159, 0.2) 50%, 
-                  rgba(215, 196, 242, 0.1) 100%
-                )`,
-                borderColor: `${theme.accent}40`,
-                boxShadow: `0 20px 60px ${theme.accent}20, inset 0 1px 0 ${theme.accent}30`
-              }}
-            >
-              {/* Vault Icon with Glow Effect */}
-              <div className="relative">
-                <div 
-                  className="absolute inset-0 rounded-full blur-xl opacity-60"
-                  style={{ backgroundColor: theme.accent }}
-                />
-                <div 
-                  className="relative w-20 h-20 sm:w-28 sm:h-28 rounded-full flex items-center justify-center"
+            <div className="relative">
+              {/* Main Dollar Bill Container */}
+              <div 
+                className="relative transform hover:scale-105 transition-all duration-500 animate-float"
+                style={{
+                  transform: 'perspective(1000px) rotateX(15deg) rotateY(-30deg)',
+                  filter: `drop-shadow(0 20px 40px ${theme.accent}30)`
+                }}
+              >
+                {/* Dollar Bill SVG */}
+                <svg 
+                  width="320" 
+                  height="140" 
+                  viewBox="0 0 320 140" 
+                  className="w-64 h-28 sm:w-80 sm:h-35"
                   style={{
-                    background: `linear-gradient(135deg, ${theme.accent} 0%, ${theme.cta} 100%)`,
-                    boxShadow: `0 8px 32px ${theme.accent}40`
+                    filter: `drop-shadow(0 8px 24px rgba(0, 0, 0, 0.3))`
                   }}
                 >
-                  <Vault className="w-10 h-10 sm:w-14 sm:h-14" style={{ color: theme.ctaText }} />
-                </div>
+                  {/* Bill Background */}
+                  <defs>
+                    <linearGradient id="billGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: '#2A4A3A', stopOpacity: 1 }} />
+                      <stop offset="50%" style={{ stopColor: '#1E3A2E', stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: '#2A4A3A', stopOpacity: 1 }} />
+                    </linearGradient>
+                    <pattern id="billPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                      <circle cx="10" cy="10" r="1" fill="rgba(255, 255, 255, 0.1)" />
+                    </pattern>
+                  </defs>
+                  
+                  {/* Main Bill Rectangle */}
+                  <rect 
+                    x="5" 
+                    y="5" 
+                    width="310" 
+                    height="130" 
+                    rx="8" 
+                    ry="8" 
+                    fill="url(#billGradient)"
+                    stroke="rgba(255, 255, 255, 0.2)"
+                    strokeWidth="1"
+                  />
+                  
+                  {/* Pattern Overlay */}
+                  <rect 
+                    x="5" 
+                    y="5" 
+                    width="310" 
+                    height="130" 
+                    rx="8" 
+                    ry="8" 
+                    fill="url(#billPattern)"
+                  />
+                  
+                  {/* Corner Decorations */}
+                  <circle cx="40" cy="35" r="15" fill="none" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="2" />
+                  <circle cx="280" cy="35" r="15" fill="none" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="2" />
+                  <circle cx="40" cy="105" r="15" fill="none" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="2" />
+                  <circle cx="280" cy="105" r="15" fill="none" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="2" />
+                  
+                  {/* Central Dollar Symbol */}
+                  <circle cx="160" cy="70" r="35" fill="rgba(255, 255, 255, 0.1)" stroke="rgba(255, 255, 255, 0.3)" strokeWidth="2" />
+                  <text 
+                    x="160" 
+                    y="80" 
+                    textAnchor="middle" 
+                    fontSize="32" 
+                    fontWeight="bold" 
+                    fill="rgba(255, 255, 255, 0.9)"
+                    fontFamily="serif"
+                  >
+                    $
+                  </text>
+                  
+                  {/* Corner Numbers */}
+                  <text x="25" y="25" textAnchor="middle" fontSize="12" fontWeight="bold" fill="rgba(255, 255, 255, 0.8)">50</text>
+                  <text x="295" y="25" textAnchor="middle" fontSize="12" fontWeight="bold" fill="rgba(255, 255, 255, 0.8)">50</text>
+                  <text x="25" y="125" textAnchor="middle" fontSize="12" fontWeight="bold" fill="rgba(255, 255, 255, 0.8)">50</text>
+                  <text x="295" y="125" textAnchor="middle" fontSize="12" fontWeight="bold" fill="rgba(255, 255, 255, 0.8)">50</text>
+                  
+                  {/* Decorative Lines */}
+                  <line x1="70" y1="35" x2="250" y2="35" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" />
+                  <line x1="70" y1="105" x2="250" y2="105" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" />
+                  
+                  {/* Text Elements */}
+                  <text x="160" y="50" textAnchor="middle" fontSize="10" fill="rgba(255, 255, 255, 0.7)" fontFamily="serif">CASHBACK NOTE</text>
+                  <text x="160" y="95" textAnchor="middle" fontSize="8" fill="rgba(255, 255, 255, 0.6)" fontFamily="serif">FIFTY PERCENT</text>
+                </svg>
               </div>
 
-              {/* Money Symbols Floating Around Vault */}
-              <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full flex items-center justify-center animate-bounce" style={{ backgroundColor: `${theme.accent}20`, animationDelay: '0s' }}>
+              {/* Floating Money Symbols Around Bill */}
+              <div className="absolute -top-6 -left-8 w-8 h-8 rounded-full flex items-center justify-center animate-bounce" style={{ backgroundColor: `${theme.accent}20`, animationDelay: '0s' }}>
                 <DollarSign className="w-4 h-4" style={{ color: theme.accent }} />
               </div>
-              <div className="absolute -top-2 -right-6 w-6 h-6 rounded-full flex items-center justify-center animate-bounce" style={{ backgroundColor: `${theme.accent}20`, animationDelay: '0.5s' }}>
+              <div className="absolute -top-4 -right-10 w-6 h-6 rounded-full flex items-center justify-center animate-bounce" style={{ backgroundColor: `${theme.accent}20`, animationDelay: '0.7s' }}>
                 <span className="text-sm font-bold" style={{ color: theme.accent }}>$</span>
               </div>
-              <div className="absolute -bottom-4 -right-4 w-8 h-8 rounded-full flex items-center justify-center animate-bounce" style={{ backgroundColor: `${theme.accent}20`, animationDelay: '1s' }}>
+              <div className="absolute -bottom-6 -right-8 w-8 h-8 rounded-full flex items-center justify-center animate-bounce" style={{ backgroundColor: `${theme.accent}20`, animationDelay: '1.4s' }}>
                 <TrendingUp className="w-4 h-4" style={{ color: theme.accent }} />
               </div>
-              <div className="absolute -bottom-2 -left-6 w-6 h-6 rounded-full flex items-center justify-center animate-bounce" style={{ backgroundColor: `${theme.accent}20`, animationDelay: '1.5s' }}>
+              <div className="absolute -bottom-4 -left-10 w-6 h-6 rounded-full flex items-center justify-center animate-bounce" style={{ backgroundColor: `${theme.accent}20`, animationDelay: '2.1s' }}>
                 <span className="text-sm font-bold" style={{ color: theme.accent }}>%</span>
               </div>
+
+              {/* Glow Effect Behind Bill */}
+              <div 
+                className="absolute inset-0 rounded-2xl blur-xl opacity-30 animate-pulse"
+                style={{ 
+                  background: `linear-gradient(135deg, ${theme.accent} 0%, ${theme.cta} 100%)`,
+                  transform: 'scale(1.2)',
+                  zIndex: -1
+                }}
+              />
             </div>
           </div>
 
@@ -231,24 +303,47 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Additional CSS for enhanced animations */}
+      {/* Enhanced CSS animations */}
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+          0%, 100% { 
+            transform: perspective(1000px) rotateX(15deg) rotateY(-30deg) translateY(0px);
+          }
+          50% { 
+            transform: perspective(1000px) rotateX(15deg) rotateY(-30deg) translateY(-15px);
+          }
         }
         
         .animate-float {
-          animation: float 3s ease-in-out infinite;
+          animation: float 4s ease-in-out infinite;
         }
         
         @keyframes glow {
-          0%, 100% { box-shadow: 0 0 20px ${theme.accent}40; }
-          50% { box-shadow: 0 0 40px ${theme.accent}60; }
+          0%, 100% { 
+            box-shadow: 0 0 20px ${theme.accent}40; 
+          }
+          50% { 
+            box-shadow: 0 0 40px ${theme.accent}60; 
+          }
         }
         
         .animate-glow {
           animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+          0% { 
+            background-position: -200% 0; 
+          }
+          100% { 
+            background-position: 200% 0; 
+          }
+        }
+        
+        .animate-shimmer {
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          background-size: 200% 100%;
+          animation: shimmer 3s ease-in-out infinite;
         }
       `}</style>
     </section>

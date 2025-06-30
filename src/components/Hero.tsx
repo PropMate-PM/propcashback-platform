@@ -13,12 +13,16 @@ export default function Hero() {
   }
 
   return (
-    // **MODIFIED:** The inline styles for layout have been converted to Tailwind classes.
-    // - `min-h-screen`: Sets min-height to 100vh.
-    // - `flex`, `flex-col`, `items-center`, `justify-center`: These apply the flexbox properties
-    //   to center the content both vertically and horizontally.
     <section 
-      className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center"
+      className="relative overflow-hidden"
+      style={{
+        // **HERO SECTION CSS REQUIREMENTS**
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
     >
       {/* Extended Premium Background with Gradient - covers header area */}
       <div 

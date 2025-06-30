@@ -90,7 +90,7 @@ function AppContent() {
       <Header 
         onAdminClick={() => setIsAdminPanelOpen(true)}
         user={user}
-        onAuthClick={() => handleAuthClick('signin')}
+        onAuthClick={handleAuthClick}
         onSignOut={handleSignOut}
       />
       <Hero />

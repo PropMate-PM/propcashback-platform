@@ -5,7 +5,7 @@ import { useTheme } from '../contexts/ThemeContext'
 interface HeaderProps {
   onAdminClick: () => void
   user: any
-  onAuthClick: () => void
+  onAuthClick: (mode?: 'signin' | 'signup') => void
   onSignOut: () => void
 }
 
@@ -93,12 +93,6 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
-  }
-
-  // Handle auth click with proper mode
-  const handleAuthClick = (mode: 'signin' | 'signup' = 'signin') => {
-    // We'll need to pass the mode to the auth modal
-    onAuthClick()
   }
 
   return (
@@ -295,14 +289,14 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
               ) : (
                 <div className="flex items-center space-x-3 lg:space-x-4">
                   <button
-                    onClick={() => handleAuthClick('signin')}
+                    onClick={() => onAuthClick('signin')}
                     className="typography-ui font-semibold transition-colors hover:opacity-80"
                     style={{ color: theme.textSecondary }}
                   >
                     Sign In
                   </button>
                   <button
-                    onClick={() => handleAuthClick('signup')}
+                    onClick={() => onAuthClick('signup')}
                     className="px-4 lg:px-6 py-2 lg:py-2.5 rounded-2xl typography-ui font-semibold transition-all duration-200 hover:scale-105"
                     style={{
                       backgroundColor: theme.cta,
@@ -423,7 +417,7 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
                   <div className="space-y-3 pt-4 border-t" style={{ borderColor: theme.cardBorder }}>
                     <button
                       onClick={() => {
-                        handleAuthClick('signin')
+                        onAuthClick('signin')
                         setIsMenuOpen(false)
                       }}
                       className="typography-ui font-semibold transition-colors hover:opacity-80 text-left"
@@ -433,7 +427,7 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
                     </button>
                     <button
                       onClick={() => {
-                        handleAuthClick('signup')
+                        onAuthClick('signup')
                         setIsMenuOpen(false)
                       }}
                       className="px-4 py-2.5 rounded-2xl text-center typography-ui font-semibold transition-all duration-200 w-full"

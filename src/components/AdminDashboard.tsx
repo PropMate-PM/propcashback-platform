@@ -343,15 +343,16 @@ export default function AdminDashboard({ isOpen, onClose, user }: AdminDashboard
   return (
     <div 
       className="fixed inset-0 flex items-center justify-center p-2 sm:p-4 z-50"
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(10px)' }}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(20px)' }}
     >
       <div 
         className="p-4 sm:p-6 max-w-7xl w-full flex flex-col rounded-2xl border"
         style={{
           backgroundColor: theme.cardBackground,
-          backdropFilter: theme.backdropFilter,
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
           borderColor: theme.cardBorder,
-          boxShadow: theme.cardShadow,
+          boxShadow: `${theme.cardShadow}, 0 0 0 1px rgba(255, 255, 255, 0.05)`,
           // Fixed dimensions to prevent size changes
           height: 'min(90vh, 800px)',
           maxHeight: 'min(90vh, 800px)'
@@ -874,15 +875,16 @@ export default function AdminDashboard({ isOpen, onClose, user }: AdminDashboard
         {selectedUser && (
           <div 
             className="fixed inset-0 flex items-center justify-center p-4 z-50"
-            style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(10px)' }}
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(20px)' }}
           >
             <div 
               className="p-4 sm:p-6 max-w-md w-full rounded-2xl border"
               style={{
                 backgroundColor: theme.cardBackground,
-                backdropFilter: theme.backdropFilter,
+                backdropFilter: 'blur(24px)',
+                WebkitBackdropFilter: 'blur(24px)',
                 borderColor: theme.cardBorder,
-                boxShadow: theme.cardShadow
+                boxShadow: `${theme.cardShadow}, 0 0 0 1px rgba(255, 255, 255, 0.05)`
               }}
             >
               <div className="flex items-center justify-between mb-4">

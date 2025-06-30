@@ -32,7 +32,7 @@ export default function Hero() {
                   position: 'relative'
                 }}
               >
-                50% BACK.
+                50% BACK
               </span>
               <span 
                 className="block text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight mt-2 sm:mt-4 relative z-10"
@@ -42,7 +42,7 @@ export default function Hero() {
                   position: 'relative'
                 }}
               >
-                NO CATCH.
+                NO CATCH
               </span>
             </h1>
           </div>

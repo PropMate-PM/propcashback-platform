@@ -23,23 +23,23 @@ export default function Hero() {
           <div className="mb-8 sm:mb-12">
             <h1 className="mb-4 sm:mb-6 leading-none">
               <span 
-                className="block text-6xl sm:text-8xl lg:text-9xl font-black tracking-tight"
+                className="block text-6xl sm:text-8xl lg:text-9xl font-black tracking-tight relative z-10"
                 style={{ 
                   color: theme.accent,
                   textShadow: `0 4px 20px ${theme.accent}40`,
-                  background: `linear-gradient(135deg, ${theme.accent} 0%, ${theme.cta} 100%)`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  // Use solid color instead of gradient for better visibility in light mode
+                  WebkitTextFillColor: theme.accent,
+                  position: 'relative'
                 }}
               >
                 50% BACK.
               </span>
               <span 
-                className="block text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight mt-2 sm:mt-4"
+                className="block text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight mt-2 sm:mt-4 relative z-10"
                 style={{ 
                   color: theme.textPrimary,
-                  textShadow: `0 2px 10px rgba(0, 0, 0, 0.3)`
+                  textShadow: `0 2px 10px rgba(0, 0, 0, 0.3)`,
+                  position: 'relative'
                 }}
               >
                 NO CATCH.

@@ -389,16 +389,6 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
             </div>
           )}
         </div>
-
-        {/* Debug Info (remove in production) */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="fixed bottom-4 right-4 bg-black bg-opacity-50 text-white p-2 rounded text-xs z-50">
-            <div>Scroll: {Math.round(scrollY)}px</div>
-            <div>Max: {Math.round(documentHeight - windowHeight)}px</div>
-            <div>Progress: {Math.round(scrollProgress * 100)}%</div>
-            <div>Opacity: {Math.round(fadeOpacity * 100)}%</div>
-          </div>
-        )}
       </header>
     </>
   )

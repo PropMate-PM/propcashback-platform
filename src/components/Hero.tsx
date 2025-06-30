@@ -13,39 +13,13 @@ export default function Hero() {
   }
 
   return (
-    // **MODIFIED:** Using min-h-screen with proper positioning to extend background beyond viewport
-    // while allowing content to flow naturally
     <section 
-      className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center"
+      className="relative flex flex-col items-center justify-center"
+      style={{
+        height: '100vh',
+      }}
     >
-      {/* Extended Premium Background with Gradient - covers full viewport */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          background: `linear-gradient(135deg, 
-            ${theme.background} 0%, 
-            rgba(139, 90, 159, 0.1) 25%, 
-            ${theme.background} 50%, 
-            rgba(215, 196, 242, 0.05) 75%, 
-            ${theme.background} 100%
-          )`,
-          top: '-100vh',
-          height: '200vh'
-        }}
-      />
-
-      {/* Subtle Pattern Overlay - covers full viewport */}
-      <div 
-        className="absolute inset-0 z-0 opacity-5"
-        style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
-                          radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
-          backgroundSize: '60px 60px, 40px 40px',
-          top: '-100vh',
-          height: '200vh'
-        }}
-      />
-
+      {/* All background elements have been removed and moved to App.tsx */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Main Hero Content */}

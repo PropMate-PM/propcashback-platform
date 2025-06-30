@@ -13,12 +13,12 @@ export default function Hero() {
   }
 
   return (
-    // **MODIFIED:** Changed to h-screen to force full viewport height, removed min-h-screen
-    // Added pt-20 or pt-24 to account for header height if needed
+    // **MODIFIED:** Using min-h-screen with proper positioning to extend background beyond viewport
+    // while allowing content to flow naturally
     <section 
-      className="relative overflow-hidden h-screen flex flex-col items-center justify-center"
+      className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center"
     >
-      {/* Extended Premium Background with Gradient - simplified to cover full viewport */}
+      {/* Extended Premium Background with Gradient - covers full viewport */}
       <div 
         className="absolute inset-0 z-0"
         style={{
@@ -28,17 +28,21 @@ export default function Hero() {
             ${theme.background} 50%, 
             rgba(215, 196, 242, 0.05) 75%, 
             ${theme.background} 100%
-          )`
+          )`,
+          top: '-100vh',
+          height: '200vh'
         }}
       />
 
-      {/* Subtle Pattern Overlay - simplified */}
+      {/* Subtle Pattern Overlay - covers full viewport */}
       <div 
         className="absolute inset-0 z-0 opacity-5"
         style={{
           backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
                           radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
-          backgroundSize: '60px 60px, 40px 40px'
+          backgroundSize: '60px 60px, 40px 40px',
+          top: '-100vh',
+          height: '200vh'
         }}
       />
 

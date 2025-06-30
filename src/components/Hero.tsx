@@ -13,11 +13,10 @@ export default function Hero() {
   }
 
   return (
-    <section 
+    <section
       className="relative overflow-hidden"
       style={{
-        // **HERO SECTION CSS REQUIREMENTS**
-        minHeight: '100vh',
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -25,44 +24,41 @@ export default function Hero() {
       }}
     >
       {/* Extended Premium Background with Gradient - covers header area */}
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
-          background: `linear-gradient(135deg, 
-            ${theme.background} 0%, 
-            rgba(139, 90, 159, 0.1) 25%, 
-            ${theme.background} 50%, 
-            rgba(215, 196, 242, 0.05) 75%, 
+          background: `linear-gradient(135deg,
+            ${theme.background} 0%,
+            rgba(139, 90, 159, 0.1) 25%,
+            ${theme.background} 50%,
+            rgba(215, 196, 242, 0.05) 75%,
             ${theme.background} 100%
           )`,
-          // Extend background upward to cover header
-          top: '-120px',
-          height: 'calc(100vh + 120px)'
+          height: '100vh'
         }}
       />
 
       {/* Subtle Pattern Overlay - also extended */}
-      <div 
+      <div
         className="absolute inset-0 z-0 opacity-5"
         style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
+          backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px),
                           radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
           backgroundSize: '60px 60px, 40px 40px',
-          top: '-120px',
-          height: 'calc(100vh + 120px)'
+          height: '100vh'
         }}
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        
+
         {/* Main Hero Content */}
         <div className="mb-16 sm:mb-20">
           {/* Punchline */}
           <div className="mb-8 sm:mb-12">
             <h1 className="mb-4 sm:mb-6 leading-none">
-              <span 
+              <span
                 className="block text-6xl sm:text-8xl lg:text-9xl font-black tracking-tight"
-                style={{ 
+                style={{
                   color: theme.accent,
                   textShadow: `0 4px 20px ${theme.accent}40`,
                   background: `linear-gradient(135deg, ${theme.accent} 0%, ${theme.cta} 100%)`,
@@ -73,9 +69,9 @@ export default function Hero() {
               >
                 50% BACK.
               </span>
-              <span 
+              <span
                 className="block text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight mt-2 sm:mt-4"
-                style={{ 
+                style={{
                   color: theme.textPrimary,
                   textShadow: `0 2px 10px rgba(0, 0, 0, 0.3)`
                 }}
@@ -87,12 +83,12 @@ export default function Hero() {
 
           {/* Golden Vault Visual */}
           <div className="relative mb-8 sm:mb-12 flex justify-center">
-            <div 
+            <div
               className="relative p-8 sm:p-12 rounded-3xl border-2 transform hover:scale-105 transition-all duration-500"
               style={{
-                background: `linear-gradient(135deg, 
-                  rgba(215, 196, 242, 0.1) 0%, 
-                  rgba(139, 90, 159, 0.2) 50%, 
+                background: `linear-gradient(135deg,
+                  rgba(215, 196, 242, 0.1) 0%,
+                  rgba(139, 90, 159, 0.2) 50%,
                   rgba(215, 196, 242, 0.1) 100%
                 )`,
                 borderColor: `${theme.accent}40`,
@@ -101,11 +97,11 @@ export default function Hero() {
             >
               {/* Vault Icon with Glow Effect */}
               <div className="relative">
-                <div 
+                <div
                   className="absolute inset-0 rounded-full blur-xl opacity-60"
                   style={{ backgroundColor: theme.accent }}
                 />
-                <div 
+                <div
                   className="relative w-20 h-20 sm:w-28 sm:h-28 rounded-full flex items-center justify-center"
                   style={{
                     background: `linear-gradient(135deg, ${theme.accent} 0%, ${theme.cta} 100%)`,
@@ -141,7 +137,7 @@ export default function Hero() {
 
           {/* CTA Button */}
           <div className="mb-16 sm:mb-20">
-            <button 
+            <button
               onClick={handleScrollToFirms}
               className="group relative inline-flex items-center px-8 sm:px-12 py-4 sm:py-5 rounded-2xl typography-ui sm:text-lg font-bold transition-all duration-300 hover:scale-105 transform"
               style={{
@@ -151,7 +147,7 @@ export default function Hero() {
               }}
             >
               <span className="relative z-10">Get Your Cashback</span>
-              <div 
+              <div
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
                   background: `linear-gradient(135deg, ${theme.accent} 0%, ${theme.cta} 100%)`
@@ -163,7 +159,7 @@ export default function Hero() {
 
         {/* Enhanced Stats Section */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
-          <div 
+          <div
             className="group p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:border-opacity-60"
             style={{
               backgroundColor: theme.cardBackground,
@@ -172,9 +168,9 @@ export default function Hero() {
               boxShadow: theme.cardShadow
             }}
           >
-            <div 
+            <div
               className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300"
-              style={{ 
+              style={{
                 background: `linear-gradient(135deg, ${theme.accent}20 0%, ${theme.cta}20 100%)`,
                 boxShadow: `0 4px 16px ${theme.accent}20`
               }}
@@ -184,8 +180,8 @@ export default function Hero() {
             <div className="text-3xl sm:text-4xl font-black mb-2 sm:mb-3" style={{ color: theme.textPrimary }}>Up to 50%</div>
             <div className="typography-ui sm:typography-body font-semibold" style={{ color: theme.textSecondary }}>Cashback Rate</div>
           </div>
-          
-          <div 
+
+          <div
             className="group p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:border-opacity-60"
             style={{
               backgroundColor: theme.cardBackground,
@@ -194,9 +190,9 @@ export default function Hero() {
               boxShadow: theme.cardShadow
             }}
           >
-            <div 
+            <div
               className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300"
-              style={{ 
+              style={{
                 background: `linear-gradient(135deg, ${theme.accent}20 0%, ${theme.cta}20 100%)`,
                 boxShadow: `0 4px 16px ${theme.accent}20`
               }}
@@ -206,8 +202,8 @@ export default function Hero() {
             <div className="text-3xl sm:text-4xl font-black mb-2 sm:mb-3" style={{ color: theme.textPrimary }}>$50K+</div>
             <div className="typography-ui sm:typography-body font-semibold" style={{ color: theme.textSecondary }}>Paid Out</div>
           </div>
-          
-          <div 
+
+          <div
             className="group p-6 sm:p-8 rounded-2xl border transition-all duration-300 hover:scale-105 hover:border-opacity-60 sm:col-span-1 col-span-1"
             style={{
               backgroundColor: theme.cardBackground,
@@ -216,9 +212,9 @@ export default function Hero() {
               boxShadow: theme.cardShadow
             }}
           >
-            <div 
+            <div
               className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300"
-              style={{ 
+              style={{
                 background: `linear-gradient(135deg, ${theme.accent}20 0%, ${theme.cta}20 100%)`,
                 boxShadow: `0 4px 16px ${theme.accent}20`
               }}
@@ -232,7 +228,7 @@ export default function Hero() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div 
+          <div
             className="w-8 h-8 rounded-full flex items-center justify-center"
             style={{ backgroundColor: `${theme.accent}20` }}
           >
@@ -247,16 +243,16 @@ export default function Hero() {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
         }
-        
+
         .animate-float {
           animation: float 3s ease-in-out infinite;
         }
-        
+
         @keyframes glow {
           0%, 100% { box-shadow: 0 0 20px ${theme.accent}40; }
           50% { box-shadow: 0 0 40px ${theme.accent}60; }
         }
-        
+
         .animate-glow {
           animation: glow 2s ease-in-out infinite;
         }

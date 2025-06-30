@@ -97,17 +97,27 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
 
   return (
     <>
-      {/* Fixed Background Layer - Covers Entire Page */}
+      {/* Fixed Background Layer - Theme-Aware */}
       <div 
         className="fixed inset-0 z-0 pointer-events-none"
         style={{
-          background: `linear-gradient(135deg, 
-            ${theme.background} 0%, 
-            rgba(139, 90, 159, 0.1) 25%, 
-            ${theme.background} 50%, 
-            rgba(215, 196, 242, 0.05) 75%, 
-            ${theme.background} 100%
-          )`,
+          background: isDark 
+            ? `linear-gradient(135deg, 
+                ${theme.background} 0%, 
+                rgba(139, 90, 159, 0.1) 25%, 
+                ${theme.background} 50%, 
+                rgba(215, 196, 242, 0.05) 75%, 
+                ${theme.background} 100%
+              )`
+            : `linear-gradient(135deg, 
+                ${theme.background} 0%, 
+                rgba(139, 90, 159, 0.08) 15%, 
+                rgba(215, 196, 242, 0.12) 35%, 
+                ${theme.background} 50%, 
+                rgba(215, 196, 242, 0.08) 65%, 
+                rgba(139, 90, 159, 0.06) 85%, 
+                ${theme.background} 100%
+              )`,
           opacity: fadeOpacity,
           transition: 'opacity 0.1s ease-out',
           transform: 'translateZ(0)', // Hardware acceleration
@@ -115,19 +125,65 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
         }}
       />
 
-      {/* Fixed Pattern Overlay - Covers Entire Page */}
+      {/* Fixed Pattern Overlay - Theme-Aware */}
       <div 
         className="fixed inset-0 z-0 pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
-                           radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
-          backgroundSize: '60px 60px, 40px 40px',
-          opacity: fadeOpacity * 0.05,
+          backgroundImage: isDark
+            ? `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
+               radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`
+            : `radial-gradient(circle at 20% 30%, rgba(139, 90, 159, 0.4) 1.5px, transparent 1.5px), 
+               radial-gradient(circle at 80% 70%, rgba(215, 196, 242, 0.6) 1px, transparent 1px),
+               radial-gradient(circle at 60% 20%, rgba(139, 90, 159, 0.3) 0.8px, transparent 0.8px)`,
+          backgroundSize: isDark 
+            ? '60px 60px, 40px 40px'
+            : '80px 80px, 50px 50px, 30px 30px',
+          opacity: isDark ? fadeOpacity * 0.05 : fadeOpacity * 0.08,
           transition: 'opacity 0.1s ease-out',
           transform: 'translateZ(0)', // Hardware acceleration
           willChange: 'opacity'
         }}
       />
+
+      {/* Additional Light Mode Decorative Elements */}
+      {!isDark && (
+        <>
+          {/* Soft Radial Gradients for Light Mode */}
+          <div 
+            className="fixed inset-0 z-0 pointer-events-none"
+            style={{
+              background: `
+                radial-gradient(ellipse 800px 600px at 20% 10%, rgba(215, 196, 242, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 600px 800px at 80% 90%, rgba(139, 90, 159, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 400px 300px at 60% 40%, rgba(215, 196, 242, 0.08) 0%, transparent 50%)
+              `,
+              opacity: fadeOpacity * 0.6,
+              transition: 'opacity 0.1s ease-out',
+              transform: 'translateZ(0)',
+              willChange: 'opacity'
+            }}
+          />
+
+          {/* Subtle Geometric Patterns for Light Mode */}
+          <div 
+            className="fixed inset-0 z-0 pointer-events-none"
+            style={{
+              backgroundImage: `
+                linear-gradient(45deg, rgba(139, 90, 159, 0.02) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(215, 196, 242, 0.03) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(139, 90, 159, 0.02) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(215, 196, 242, 0.03) 75%)
+              `,
+              backgroundSize: '120px 120px, 120px 120px, 120px 120px, 120px 120px',
+              backgroundPosition: '0 0, 0 60px, 60px -60px, -60px 0px',
+              opacity: fadeOpacity * 0.3,
+              transition: 'opacity 0.1s ease-out',
+              transform: 'translateZ(0)',
+              willChange: 'opacity'
+            }}
+          />
+        </>
+      )}
 
       <header 
         className="sticky top-0 z-50 relative"

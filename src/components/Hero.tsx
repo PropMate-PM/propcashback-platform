@@ -13,14 +13,12 @@ export default function Hero() {
   }
 
   return (
-    // **MODIFIED:** The inline styles for layout have been converted to Tailwind classes.
-    // - `min-h-screen`: Sets min-height to 100vh.
-    // - `flex`, `flex-col`, `items-center`, `justify-center`: These apply the flexbox properties
-    //   to center the content both vertically and horizontally.
+    // **MODIFIED:** Changed to h-screen to force full viewport height, removed min-h-screen
+    // Added pt-20 or pt-24 to account for header height if needed
     <section 
-      className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center"
+      className="relative overflow-hidden h-screen flex flex-col items-center justify-center"
     >
-      {/* Extended Premium Background with Gradient - covers header area */}
+      {/* Extended Premium Background with Gradient - simplified to cover full viewport */}
       <div 
         className="absolute inset-0 z-0"
         style={{
@@ -30,22 +28,17 @@ export default function Hero() {
             ${theme.background} 50%, 
             rgba(215, 196, 242, 0.05) 75%, 
             ${theme.background} 100%
-          )`,
-          // Extend background upward to cover header
-          top: '-120px',
-          height: 'calc(100vh + 120px)'
+          )`
         }}
       />
 
-      {/* Subtle Pattern Overlay - also extended */}
+      {/* Subtle Pattern Overlay - simplified */}
       <div 
         className="absolute inset-0 z-0 opacity-5"
         style={{
           backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
                           radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
-          backgroundSize: '60px 60px, 40px 40px',
-          top: '-120px',
-          height: 'calc(100vh + 120px)'
+          backgroundSize: '60px 60px, 40px 40px'
         }}
       />
 

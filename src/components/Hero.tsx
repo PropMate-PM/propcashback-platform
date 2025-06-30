@@ -14,35 +14,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Extended Premium Background with Gradient - covers header area */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          background: `linear-gradient(135deg, 
-            ${theme.background} 0%, 
-            rgba(139, 90, 159, 0.1) 25%, 
-            ${theme.background} 50%, 
-            rgba(215, 196, 242, 0.05) 75%, 
-            ${theme.background} 100%
-          )`,
-          // Extend background upward to cover header
-          top: '-120px',
-          height: 'calc(100vh + 120px)'
-        }}
-      />
-
-      {/* Subtle Pattern Overlay - also extended */}
-      <div 
-        className="absolute inset-0 z-0 opacity-5"
-        style={{
-          backgroundImage: `radial-gradient(circle at 25% 25%, ${theme.accent} 2px, transparent 2px), 
-                           radial-gradient(circle at 75% 75%, ${theme.accent} 1px, transparent 1px)`,
-          backgroundSize: '60px 60px, 40px 40px',
-          top: '-120px',
-          height: 'calc(100vh + 120px)'
-        }}
-      />
-
+      {/* Remove local background since it's now handled globally */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20 sm:py-32">
         
         {/* Main Hero Content */}

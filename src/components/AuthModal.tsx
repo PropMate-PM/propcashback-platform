@@ -16,7 +16,7 @@ interface FormErrors {
   confirmPassword?: string
 }
 
-export default function AuthModal({ isOpen, onClose, initialMode = 'signup' }: AuthModalProps) {
+export default function AuthModal({ isOpen, onClose, initialMode = 'signin' }: AuthModalProps) {
   const { theme } = useTheme()
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode)
   const [formData, setFormData] = useState({
@@ -128,15 +128,16 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'signup' }: A
   return (
     <div 
       className="fixed inset-0 flex items-center justify-center p-4 z-50"
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(10px)' }}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(20px)' }}
     >
       <div 
         className="p-6 sm:p-8 max-w-md w-full max-h-[95vh] overflow-y-auto rounded-2xl border"
         style={{
           backgroundColor: theme.cardBackground,
-          backdropFilter: theme.backdropFilter,
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
           borderColor: theme.cardBorder,
-          boxShadow: theme.cardShadow
+          boxShadow: `${theme.cardShadow}, 0 0 0 1px rgba(255, 255, 255, 0.05)`
         }}
       >
         <div className="flex items-center justify-between mb-6 sm:mb-8">

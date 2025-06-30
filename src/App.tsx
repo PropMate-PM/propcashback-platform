@@ -16,6 +16,7 @@ function AppContent() {
   const [isCashbackModalOpen, setIsCashbackModalOpen] = useState(false)
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+  const [authModalMode, setAuthModalMode] = useState<'signin' | 'signup'>('signin')
   const [user, setUser] = useState<any>(null)
   const { theme } = useTheme()
 
@@ -49,6 +50,7 @@ function AppContent() {
 
   const handleClaimCashback = (propFirm: PropFirm) => {
     if (!user) {
+      setAuthModalMode('signup')
       setIsAuthModalOpen(true)
       return
     }
@@ -59,6 +61,11 @@ function AppContent() {
   const handleCloseCashbackModal = () => {
     setIsCashbackModalOpen(false)
     setSelectedPropFirm(null)
+  }
+
+  const handleAuthClick = (mode: 'signin' | 'signup' = 'signin') => {
+    setAuthModalMode(mode)
+    setIsAuthModalOpen(true)
   }
 
   const handleSignOut = async () => {
@@ -83,7 +90,7 @@ function AppContent() {
       <Header 
         onAdminClick={() => setIsAdminPanelOpen(true)}
         user={user}
-        onAuthClick={() => setIsAuthModalOpen(true)}
+        onAuthClick={() => handleAuthClick('signin')}
         onSignOut={handleSignOut}
       />
       <Hero />
@@ -106,6 +113,7 @@ function AppContent() {
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authModalMode}
       />
     </div>
   )

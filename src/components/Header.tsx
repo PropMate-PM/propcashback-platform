@@ -95,6 +95,12 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
     }
   }
 
+  // Handle auth click with proper mode
+  const handleAuthClick = (mode: 'signin' | 'signup' = 'signin') => {
+    // We'll need to pass the mode to the auth modal
+    onAuthClick()
+  }
+
   return (
     <>
       {/* Fixed Background Layer - Theme-Aware */}
@@ -289,14 +295,14 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
               ) : (
                 <div className="flex items-center space-x-3 lg:space-x-4">
                   <button
-                    onClick={onAuthClick}
+                    onClick={() => handleAuthClick('signin')}
                     className="typography-ui font-semibold transition-colors hover:opacity-80"
                     style={{ color: theme.textSecondary }}
                   >
                     Sign In
                   </button>
                   <button
-                    onClick={onAuthClick}
+                    onClick={() => handleAuthClick('signup')}
                     className="px-4 lg:px-6 py-2 lg:py-2.5 rounded-2xl typography-ui font-semibold transition-all duration-200 hover:scale-105"
                     style={{
                       backgroundColor: theme.cta,
@@ -417,7 +423,7 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
                   <div className="space-y-3 pt-4 border-t" style={{ borderColor: theme.cardBorder }}>
                     <button
                       onClick={() => {
-                        onAuthClick()
+                        handleAuthClick('signin')
                         setIsMenuOpen(false)
                       }}
                       className="typography-ui font-semibold transition-colors hover:opacity-80 text-left"
@@ -427,7 +433,7 @@ export default function Header({ onAdminClick, user, onAuthClick, onSignOut }: H
                     </button>
                     <button
                       onClick={() => {
-                        onAuthClick()
+                        handleAuthClick('signup')
                         setIsMenuOpen(false)
                       }}
                       className="px-4 py-2.5 rounded-2xl text-center typography-ui font-semibold transition-all duration-200 w-full"
